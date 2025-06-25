@@ -41,6 +41,17 @@ html {
   gap: 15px;
   animation: fadeInUp 0.6s ease-out;
   -webkit-app-region: drag;
+  height: 100vh;
+}
+
+.menu-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.menu-footer {
+  flex-shrink: 0;
+  padding: 20px;
 }
 
 .menu input,
@@ -177,7 +188,6 @@ body {
 .menu {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 .menu-footer {
   -webkit-app-region: drag;
@@ -186,6 +196,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  -webkit-app-region: no-drag;
 }
 
 #closeAppBtn {
@@ -288,6 +299,30 @@ body {
 }
 .flatpickr-calendar {
   -webkit-app-region: no-drag;
+}
+.menu-body {
+  scrollbar-width: thin;
+  scrollbar-color: #ff6f61 transparent;
+}
+
+.menu-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.menu-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menu-body::-webkit-scrollbar-thumb {
+  background-color: #ff6f61;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.3s ease;
+}
+
+.menu-body::-webkit-scrollbar-thumb:hover {
+  background-color: #ff4a3f;
 }
 @keyframes fadeInUp {
   0% {

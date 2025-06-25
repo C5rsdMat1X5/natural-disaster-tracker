@@ -10,7 +10,7 @@ let backendProcess;
 function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
-    height: 800,
+    height: 1000,
     transparent: true,
     icon: path.join(__dirname, '..', 'assets', 'icon.png'),
     frame: false,
