@@ -3,9 +3,11 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' http://localhost:8000; script-src 'self' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com; img-src 'self' data: https://a.tile.openstreetmap.org https://b.tile.openstreetmap.org https://c.tile.openstreetmap.org;">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Natural Disaster Tracker</title>
 
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -17,6 +19,8 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+  
 </head>
 
 <body>
@@ -35,19 +39,36 @@
         <hr />
 
         <div class="filters">
-          <span class="checkboxes fires-checkbox">
-            <input type="checkbox" id="firesBtn" />
-            <label for="firesBtn">🔥 Fires</label>
-          </span>
-          <span class="checkboxes earthquakes-checkbox">
-            <input type="checkbox" id="equakesBtn" />
-            <label for="equakesBtn">🌐 Earthquakes</label>
-          </span>
-          <span class="checkboxes accuracy-checkbox">
-            <input type="checkbox" id="accuracyBtn" />
-            <label for="accuracyBtn">📊 Accuracy Mode</label>
-          </span>
-          <input type="text" id="datePicker" placeholder="Select date" class="date-picker" />
+          <fieldset class="filters">
+            <legend>Filter events</legend>
+
+            <span class="checkboxes fires-checkbox">
+              <input type="checkbox" id="firesBtn" />
+              <label for="firesBtn" title="Rendering all fire markers may cause performance issues">🔥 Fires</label>
+            </span>
+
+            <span class="checkboxes earthquakes-checkbox">
+              <input type="checkbox" id="equakesBtn" />
+              <label for="equakesBtn">🌐 Earthquakes</label>
+            </span>
+
+            <span class="checkboxes accuracy-checkbox">
+              <input type="checkbox" id="accuracyBtn" checked />
+              <label for="accuracyBtn">📊 Accuracy Mode</label>
+            </span>
+
+            <span class="checkboxes cluster-checkbox">
+              <input type="checkbox" id="clusterBtn" checked />
+              <label for="clusterBtn">🧊 Cluster (recommended)</label>
+            </span>
+
+            <span class="checkboxes heatmap-checkbox">
+              <input type="checkbox" id="heatmapBtn" />
+              <label for="heatmapBtn">🔥 Heatmap (fire only)</label>
+            </span>
+
+            <input type="text" id="datePicker" placeholder="Select date" class="date-picker" />
+          </fieldset>
         </div>
 
         <hr />
@@ -62,6 +83,7 @@
       </div>
 
       <div class="menu-footer">
+        <p class="drag">Drag MEEE</p>
         <hr />
         <p class="credits">Made with ❤️ by Matias</p>
       </div>
@@ -69,9 +91,10 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="app.js"></script>
-
+  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>

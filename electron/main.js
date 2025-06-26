@@ -8,9 +8,10 @@ ipcMain.on('close-app', (event) => {
 let backendProcess;
 
 function createWindow() {
+  const isDev = !app.isPackaged;
   const win = new BrowserWindow({
-    width: 1200,
-    height: 1000,
+    width: 1400,
+    height: 850,
     transparent: true,
     icon: path.join(__dirname, '..', 'assets', 'icon.png'),
     frame: false,
@@ -18,18 +19,18 @@ function createWindow() {
     hasShadow: false,
     vibrancy: 'fullscreen-ui',
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
       contextIsolation: false,
       nodeIntegration: true,
     },
   });
 
   const { spawn } = require('child_process');
-  const backendPath = path.join(__dirname, '../backend/dist/backend');
+  const backendPath = isDev
+    ? path.join(__dirname, '..', 'backend', 'dist', 'backend')
+    : path.join(process.resourcesPath, 'backend');
 
-  backendProcess = spawn(backendPath, {
-    shell: true
-  });
+  backendProcess = spawn(backendPath);
+  console.log(`[backend] started with PID ${backendProcess.pid}`);
 
   backendProcess.stdout.on('data', (data) => {
     console.log(`[backend] ${data}`);
@@ -43,8 +44,13 @@ function createWindow() {
     console.log(`Backend exited with code ${code}`);
   });
 
-  win.loadFile(path.join(__dirname, '../frontend/index.html'));
+  win.loadFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 }
+
+
+app.on('before-quit', () => {
+  if (backendProcess) backendProcess.kill();
+});
 
 app.whenReady().then(createWindow);
 

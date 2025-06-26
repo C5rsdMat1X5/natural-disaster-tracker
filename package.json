@@ -30,6 +30,12 @@
       "assets/**/*",
       "package.json"
     ],
+    "extraResources": [
+      {
+        "from": "backend/dist/backend",
+        "to": "backend"
+      }
+    ],
     "mac": {
       "target": "dmg",
       "icon": "assets/icon.icns",
@@ -46,5 +52,10 @@
       ],
       "icon": "assets/icon.png"
     }
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "leaflet.heat": "^0.2.0",
+    "leaflet.markercluster": "^1.5.3"
   }
 }

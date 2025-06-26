@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from typing import Optional
 from services.nasa_fires import get_fires
-from services.usgs import get_equakes
+from services.usgs import get_earthquakes
 
 app = FastAPI()
 
@@ -11,7 +11,7 @@ def fires(date: Optional[str] = None):
 
 @app.get("/api/earthquakes")
 def get_quakes(date: Optional[str] = None):
-    return get_equakes(date)
+    return get_earthquakes(date)
 
 if __name__ == "__main__":
     import uvicorn
